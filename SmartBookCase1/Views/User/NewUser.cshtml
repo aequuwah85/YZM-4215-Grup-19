@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "NewUser";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<form class="form-group" method="post">
+    <br />
+    <h3> KAYIT OL  </h3>
+    <h4> Smart-BookCase Kullanıcı Kayıt Sayfası </h4>
+  
+    <hr />
+    <div style="margin-top:40px" class="col-md-4">
+
+        <label> Name-Surname : </label>
+        <input class="form-control" type="text" name="UserName" required />
+        <br />
+        <label> E-Mail : </label>
+        <input type="text" class="form-control" name="UserEmail" required />
+        <br />
+        <label> Phone-Number :</label>
+        <input type="text" class="form-control" name="UserPhone" required />
+        <br />
+        <label> Password : </label>
+        <input type="password" class="form-control" id="myInput" name="UserPassword" required />
+        <h6></h6>
+        <input type="checkbox" onclick="myFunction()"> Show Password
+
+
+        <div style="margin-top:30px">
+            <button class="btn btn-success"> Kayıt Ol </button>
+        </div>
+        
+
+        <div style="margin-top:80px">
+            @Html.ActionLink("Back to MainMenu", "Index", "Home") | 
+            @Html.ActionLink("Login", "login" , "User")
+        </div>
+
+    </div> 
+
+</form>
+
+
+<script>
+  
+    function myFunction() {
+        var x = document.getElementById("myInput");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+</script>
