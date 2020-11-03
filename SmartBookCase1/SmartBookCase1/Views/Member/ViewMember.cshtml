@@ -1,0 +1,54 @@
+﻿@using SmartBookCase1.Models.Entity
+@model List<MemberInformation>
+
+
+@{
+    ViewBag.Title = "ViewMember";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Üyeler</h2>
+<br />
+
+@using (Html.BeginForm("ViewMember", "Member", FormMethod.Get))
+{
+    <p>
+        Üye Adı ile Arama: @Html.TextBox("p")
+        <input type="submit" value="Ara" />
+    </p>
+}
+
+
+<br />
+<table id="tbl1" class="table table-bordered">
+    <thead>
+        <tr>
+            
+            <th>Name</th>
+            <th>E-mail</th>
+            <th>Phone</th>
+            <th>Adress</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+        <tr>
+            <td>@m.MemberName</td>
+            <td>@m.MemberEmail</td>
+            <td>@m.MemberPhone</td>
+            <td>@m.MemberAdress</td>
+
+            <td><a href="/Member/EditMember/@m.MemberID" class=" btn btn-info"> Güncelle </a></td>
+            <td><a href="/Member/DeleteMember/@m.MemberID" class=" btn btn-warning"> Sil </a></td>
+        </tr>
+        }
+
+    </tbody>
+
+
+
+</table>
+
+
