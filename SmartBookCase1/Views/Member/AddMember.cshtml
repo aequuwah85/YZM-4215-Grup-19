@@ -4,6 +4,15 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@ViewBag.Message");
+        };
+    </script>
+}
+
 <form class="form-group" method="post">
     <br />
     <h3> ÜYE KAYITLARI </h3>
@@ -33,7 +42,7 @@
 
 
         <div style="margin-top:80px">
-            @Html.ActionLink("Back to MainMenu", "Index", "Home")           
+            @Html.ActionLink("Back to MainMenu", "Index", "Home")
         </div>
 
     </div>

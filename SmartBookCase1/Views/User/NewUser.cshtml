@@ -4,11 +4,20 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@ViewBag.Message");
+        };
+    </script>
+}
+
 <form class="form-group" method="post">
     <br />
     <h3> KAYIT OL  </h3>
     <h4> Smart-BookCase Kullanıcı Kayıt Sayfası </h4>
-  
+
     <hr />
     <div style="margin-top:40px" class="col-md-4">
 
@@ -30,20 +39,20 @@
         <div style="margin-top:30px">
             <button class="btn btn-success"> Kayıt Ol </button>
         </div>
-        
+
 
         <div style="margin-top:80px">
-            @Html.ActionLink("Back to MainMenu", "Index", "Home") | 
-            @Html.ActionLink("Login", "login" , "User")
+            @Html.ActionLink("Back to MainMenu", "Index", "Home") |
+            @Html.ActionLink("Login", "login", "User")
         </div>
 
-    </div> 
+    </div>
 
 </form>
 
 
 <script>
-  
+
     function myFunction() {
         var x = document.getElementById("myInput");
         if (x.type === "password") {

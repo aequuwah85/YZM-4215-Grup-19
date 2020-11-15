@@ -37,6 +37,7 @@ namespace SmartBookCase1.Controllers
                 var varmi = db.UserInformation.Where(i => i.UserEmail == p1.UserEmail).SingleOrDefault();
                 if (varmi != null)
                 {
+                    ViewBag.Message = "Girilen E-maile Kayitli bir Kullanici Hesabi Var!! ";
                     return View();
                 }
 
@@ -89,6 +90,7 @@ namespace SmartBookCase1.Controllers
                   var u = db.UserInformation.Where(i => i.UserEmail == p1.UserEmail).SingleOrDefault();
                   if (u == null)
                   {
+                    ViewBag.Message = "Girilen E-maile Kayitli bir Kullanici Hesabi Yok!! ";
                       return View();
                   }
                   string pswrd = Encrypt.MD5Create(p1.UserPassword);
@@ -101,7 +103,8 @@ namespace SmartBookCase1.Controllers
                   }
                   else
                   {
-                      return View();
+                    ViewBag.Message = "Sifre veya E-mail Hatali !! ";
+                    return View();
                   }
               }
               catch
@@ -160,6 +163,7 @@ namespace SmartBookCase1.Controllers
             var u = db.UserInformation.Where(i => i.UserEmail == p1.UserEmail).SingleOrDefault();
             if (u == null)
             {
+                ViewBag.Message = "Girilen E-maile Kayitli bir Kullanici Hesabi Yok!!";
                 return View();
             }
 
@@ -181,6 +185,8 @@ namespace SmartBookCase1.Controllers
             string pswrd = Encrypt.MD5Create(PasswordCode.ToString());
             u.UserPassword = pswrd;
             db.SaveChanges();
+
+            ViewBag.Message = "Yeni Sifreniz E-posta Adresinize Gonderildi";
 
             return RedirectToAction("Login", "User");
         }

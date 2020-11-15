@@ -21,15 +21,27 @@
                 <a class="navbar-brand" href="#">SMART-BOOKCASE</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Book-Archive <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/BookArchive/AddBook/">Add Book</a></li>
+                        <li><a href="/BookArchive/ViewBook">View Books</a></li>
+                    </ul>
+                </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Members <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="/Member/AddMember/">Add Member</a></li>
-                        <li><a href="/Member/ViewMember">View Members</a></li>                     
+                        <li><a href="/Member/ViewMember">View Members</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Page 2</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Book-Rental <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/Member/AddMember/">Add Book-Rental</a></li>
+                        
+                    </ul>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if (Session["UserName"] == null)

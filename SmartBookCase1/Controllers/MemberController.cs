@@ -31,6 +31,7 @@ namespace SmartBookCase1.Controllers
                 var varmi = db.MemberInformation.Where(i => i.MemberEmail == p1.MemberEmail).SingleOrDefault();
                 if (varmi != null)
                 {
+                    ViewBag.Message = "Girilen E-maile Kayitli bir Kullanici Hesabi Var!! ";
                     return View();
                 }
 
@@ -49,7 +50,7 @@ namespace SmartBookCase1.Controllers
                 smtp.EnableSsl = true;
                 smtp.Send(eposta);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("ViewMember", "Member");
             }
             catch
             {
@@ -75,7 +76,8 @@ namespace SmartBookCase1.Controllers
             var a = db.MemberInformation.Find(id);
             db.MemberInformation.Remove(a);
             db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+
+            return RedirectToAction("ViewMember", "Member");
         }
 
         [HttpGet]
@@ -97,7 +99,7 @@ namespace SmartBookCase1.Controllers
                 kisi.MemberAdress = p1.MemberAdress;
 
                 db.SaveChanges();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("ViewMember", "Member");
             }
             catch
             {
