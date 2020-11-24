@@ -14,7 +14,7 @@ namespace SmartBookCase1.Controllers
 {
     public class MemberController : Controller
     {
-        SmartBookcaseDtbsEntitie db = new SmartBookcaseDtbsEntitie();
+        SmartBookcaseDtbsEntities11 db = new SmartBookcaseDtbsEntities11();
 
         [HttpGet]
         public ActionResult AddMember()
@@ -32,6 +32,12 @@ namespace SmartBookCase1.Controllers
                 if (varmi != null)
                 {
                     ViewBag.Message = "Girilen E-maile Kayitli bir Kullanici Hesabi Var!! ";
+                    return View();
+                }
+                var varmi2 = db.MemberInformation.Where(i => i.MemberTcNo == p1.MemberTcNo).SingleOrDefault();
+                if (varmi2 != null)
+                {
+                    ViewBag.Message = "Girilen TC. No ile Kayitli bir Kullanici Hesabi Var!! ";
                     return View();
                 }
 
@@ -54,7 +60,7 @@ namespace SmartBookCase1.Controllers
             }
             catch
             {
-                return View();
+                return RedirectToAction("ViewMember", "Member");
             }
 
         }
@@ -96,7 +102,7 @@ namespace SmartBookCase1.Controllers
                 kisi.MemberName = p1.MemberName;
                 kisi.MemberEmail = p1.MemberEmail;
                 kisi.MemberPhone = p1.MemberPhone;
-                kisi.MemberAdress = p1.MemberAdress;
+                kisi.MemberTcNo = p1.MemberTcNo;
 
                 db.SaveChanges();
                 return RedirectToAction("ViewMember", "Member");

@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BookArchiveController.cs" />
+    <Compile Include="Controllers\BookRentalsController.cs" />
     <Compile Include="Controllers\Encrypt.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="Models\Entity\BookRent.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entity\Class1.cs" />
     <Compile Include="Models\Entity\MemberInformation.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -159,6 +161,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\sp_helpdiagrams_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\sysdiagrams.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -230,6 +238,12 @@
     <Content Include="Views\BookArchive\AddBook.cshtml" />
     <Content Include="Views\BookArchive\ViewBook.cshtml" />
     <Content Include="Views\BookArchive\EditBook.cshtml" />
+    <Content Include="Views\BookRentals\RentalOperations.cshtml" />
+    <Content Include="Views\BookRentals\AddBookRental.cshtml" />
+    <Content Include="Views\BookRentals\AllBookRental.cshtml" />
+    <Content Include="Views\BookRentals\BookRentalDetail.cshtml" />
+    <Content Include="Views\BookRentals\ReturnOperations.cshtml" />
+    <Content Include="Views\BookRentals\ReturnBookRental.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

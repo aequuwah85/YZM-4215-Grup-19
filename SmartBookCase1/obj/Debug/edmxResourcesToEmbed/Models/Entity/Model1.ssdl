@@ -5,11 +5,12 @@
       <PropertyRef Name="BookID" />
     </Key>
     <Property Name="BookID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="BookName" Type="nchar" MaxLength="50" Nullable="false" />
-    <Property Name="BookCategory" Type="nchar" MaxLength="50" Nullable="false" />
-    <Property Name="BookStock" Type="nchar" MaxLength="50" Nullable="false" />
-    <Property Name="BookAuthor" Type="nchar" MaxLength="50" Nullable="false" />
-    <Property Name="BookBarcode" Type="nchar" MaxLength="50" />
+    <Property Name="BookName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BookCategory" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BookStock" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BookAuthor" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BookBarcode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BookPublisherHouse" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="BookRent">
     <Key>
@@ -20,18 +21,19 @@
     <Property Name="BookID" Type="int" Nullable="false" />
     <Property Name="MemberID" Type="int" Nullable="false" />
     <Property Name="RentDate" Type="smalldatetime" Nullable="false" />
-    <Property Name="ReturnDate" Type="smalldatetime" />
+    <Property Name="ReturnDate" Type="smalldatetime" Nullable="false" />
     <Property Name="IsReturn" Type="bit" Nullable="false" />
+    <Property Name="RentDay" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="MemberInformation">
     <Key>
       <PropertyRef Name="MemberID" />
     </Key>
     <Property Name="MemberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="MemberName" Type="nchar" MaxLength="50" Nullable="false" />
-    <Property Name="MemberEmail" Type="nchar" MaxLength="50" Nullable="false" />
-    <Property Name="MemberPhone" Type="nchar" MaxLength="50" />
-    <Property Name="MemberAdress" Type="nchar" MaxLength="10" />
+    <Property Name="MemberName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MemberEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MemberPhone" Type="nvarchar" MaxLength="11" Nullable="false" />
+    <Property Name="MemberTcNo" Type="nvarchar" MaxLength="11" Nullable="false" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -51,7 +53,7 @@
     <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="UserEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="UserPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="UserPhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserPhone" Type="nvarchar" MaxLength="12" Nullable="false" />
   </EntityType>
   <Association Name="FK_BookRent_BookArchive">
     <End Role="BookArchive" Type="Self.BookArchive" Multiplicity="1" />
@@ -89,6 +91,37 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="SmartBookcaseDtbsModelStoreContainer">
     <EntitySet Name="BookArchive" EntityType="Self.BookArchive" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BookRent" EntityType="Self.BookRent" Schema="dbo" store:Type="Tables" />

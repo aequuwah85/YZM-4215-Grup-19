@@ -14,7 +14,7 @@ namespace SmartBookCase1.Controllers
     public class BookArchiveController : Controller
     {
         // GET: BookArchive
-        SmartBookcaseDtbsEntitie db = new SmartBookcaseDtbsEntitie();
+        SmartBookcaseDtbsEntities11 db = new SmartBookcaseDtbsEntities11();
 
 
         [HttpGet]
@@ -33,6 +33,13 @@ namespace SmartBookCase1.Controllers
                 if (varmi != null)
                 {
                     ViewBag.Message = "Girilen İsimde Kayitli bir Kitap Zaten var!! ";
+                    return View();
+                }
+
+                var varmi2 = db.BookArchive.Where(i => i.BookBarcode == p1.BookBarcode).SingleOrDefault();
+                if (varmi2 != null)
+                {
+                    ViewBag.Message = "Girilen Barkodta Kayitli bir Kitap Zaten var!! ";
                     return View();
                 }
 
@@ -86,6 +93,7 @@ namespace SmartBookCase1.Controllers
                 kitap.BookStock = p1.BookStock;
                 kitap.BookAuthor = p1.BookAuthor;
                 kitap.BookBarcode = p1.BookBarcode;
+                kitap.BookPublisherHouse = p1.BookPublisherHouse;
 
                 db.SaveChanges();
                 return RedirectToAction("ViewBook", "BookArchive");
@@ -97,12 +105,6 @@ namespace SmartBookCase1.Controllers
 
 
         }
-
-
-
-
-
-
 
 
     }

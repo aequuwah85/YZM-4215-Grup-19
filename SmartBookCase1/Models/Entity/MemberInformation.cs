@@ -24,7 +24,7 @@ namespace SmartBookCase1.Models.Entity
         public string MemberName { get; set; }
         public string MemberEmail { get; set; }
         public string MemberPhone { get; set; }
-        public string MemberAdress { get; set; }
+        public string MemberTcNo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BookRent> BookRent { get; set; }

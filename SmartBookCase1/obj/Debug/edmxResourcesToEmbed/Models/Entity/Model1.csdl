@@ -5,11 +5,12 @@
       <PropertyRef Name="BookID" />
     </Key>
     <Property Name="BookID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="BookName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="BookCategory" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="BookStock" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="BookAuthor" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="BookBarcode" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="BookName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BookCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BookStock" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BookAuthor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BookBarcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BookPublisherHouse" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="BookRent" Relationship="Self.FK_BookRent_BookArchive" FromRole="BookArchive" ToRole="BookRent" />
   </EntityType>
   <EntityType Name="BookRent">
@@ -21,8 +22,9 @@
     <Property Name="BookID" Type="Int32" Nullable="false" />
     <Property Name="MemberID" Type="Int32" Nullable="false" />
     <Property Name="RentDate" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="ReturnDate" Type="DateTime" Precision="0" />
+    <Property Name="ReturnDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="IsReturn" Type="Boolean" Nullable="false" />
+    <Property Name="RentDay" Type="Int32" Nullable="false" />
     <NavigationProperty Name="BookArchive" Relationship="Self.FK_BookRent_BookArchive" FromRole="BookRent" ToRole="BookArchive" />
     <NavigationProperty Name="MemberInformation" Relationship="Self.FK_BookRent_MemberInformation" FromRole="BookRent" ToRole="MemberInformation" />
     <NavigationProperty Name="UserInformation" Relationship="Self.FK_BookRent_UserInformation" FromRole="BookRent" ToRole="UserInformation" />
@@ -32,10 +34,10 @@
       <PropertyRef Name="MemberID" />
     </Key>
     <Property Name="MemberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="MemberName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="MemberEmail" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="MemberPhone" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-    <Property Name="MemberAdress" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="MemberName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MemberEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MemberPhone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MemberTcNo" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="BookRent" Relationship="Self.FK_BookRent_MemberInformation" FromRole="MemberInformation" ToRole="BookRent" />
   </EntityType>
   <EntityType Name="sysdiagrams">
@@ -56,7 +58,7 @@
     <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="UserEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="UserPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserPhone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="BookRent" Relationship="Self.FK_BookRent_UserInformation" FromRole="UserInformation" ToRole="BookRent" />
   </EntityType>
   <Association Name="FK_BookRent_BookArchive">
@@ -95,7 +97,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="SmartBookcaseDtbsEntitie" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="SmartBookcaseDtbsEntities11" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="BookArchive" EntityType="Self.BookArchive" />
     <EntitySet Name="BookRent" EntityType="Self.BookRent" />
     <EntitySet Name="MemberInformation" EntityType="Self.MemberInformation" />
@@ -113,5 +115,46 @@
       <End Role="UserInformation" EntitySet="UserInformation" />
       <End Role="BookRent" EntitySet="BookRent" />
     </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(SmartBookcaseDtbsModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(SmartBookcaseDtbsModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
   </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
 </Schema>

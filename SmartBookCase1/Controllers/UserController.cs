@@ -14,7 +14,7 @@ namespace SmartBookCase1.Controllers
 {
     public class UserController : Controller
     {
-        SmartBookcaseDtbsEntitie db = new SmartBookcaseDtbsEntitie();
+        SmartBookcaseDtbsEntities11 db = new SmartBookcaseDtbsEntities11();
         int PasswordCode;
 
         // GET: User

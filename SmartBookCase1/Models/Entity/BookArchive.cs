@@ -26,6 +26,7 @@ namespace SmartBookCase1.Models.Entity
         public string BookStock { get; set; }
         public string BookAuthor { get; set; }
         public string BookBarcode { get; set; }
+        public string BookPublisherHouse { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BookRent> BookRent { get; set; }

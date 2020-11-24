@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "ViewBook";
+    ViewBag.Title = "RentalOperations";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
@@ -8,7 +8,7 @@
 <h2>KİTAPLAR</h2>
 <br />
 
-@using (Html.BeginForm("ViewBook", "BookArchive", FormMethod.Get))
+@using (Html.BeginForm("RentalOperations", "BookRentals", FormMethod.Get))
 {
     <p>
         Kitap Adı ile Arama: @Html.TextBox("p")
@@ -42,8 +42,8 @@
                 <td>@m.BookPublisherHouse</td>
                 <td>@m.BookBarcode</td>
 
-                <td><a href="/BookArchive/EditBook/@m.BookID" class=" btn btn-info"> Güncelle </a></td>
-                <td><a href="/BookArchive/DeleteBook/@m.BookID" class=" btn btn-warning"> Sil </a></td>
+                <td><a href="/BookRentals/AddBookRental/@m.BookID" class=" btn btn-info"> On-Loan </a></td>
+                <td><a href="/BookRentals/AllBookRental/@m.BookID" class=" btn btn-warning"> All-Rentals </a></td>
             </tr>
         }
 
@@ -52,6 +52,8 @@
 
 
 </table>
+
+
 
 
 

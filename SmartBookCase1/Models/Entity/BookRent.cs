@@ -19,8 +19,9 @@ namespace SmartBookCase1.Models.Entity
         public int BookID { get; set; }
         public int MemberID { get; set; }
         public System.DateTime RentDate { get; set; }
-        public Nullable<System.DateTime> ReturnDate { get; set; }
+        public System.DateTime ReturnDate { get; set; }
         public bool IsReturn { get; set; }
+        public int RentDay { get; set; }
     
         public virtual BookArchive BookArchive { get; set; }
         public virtual MemberInformation MemberInformation { get; set; }

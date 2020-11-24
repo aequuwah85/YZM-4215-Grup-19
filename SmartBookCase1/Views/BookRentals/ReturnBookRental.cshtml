@@ -1,0 +1,63 @@
+﻿
+
+@{
+    ViewBag.Title = "ReturnBookRental";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+
+
+<h2>KİTAPLAR</h2>
+<br />
+
+
+
+
+<br />
+<table id="tbl1" class="table table-bordered">
+    <thead>
+        <tr>
+
+            <th>Kiralama No</th>
+            <th>Kitap No</th>
+            <th>Üye No:</th>
+            <th>Kiralama Tarihi</th>
+            <th>Gün</th>
+            <th>Teslim Tarihi</th>
+            <th>Teslim Durumu</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+            <tr>
+                <td>@m.RentID</td>
+                <td>@m.BookID</td>
+                <td>@m.MemberID</td>
+                <td>@m.RentDate</td>
+                <td>@m.RentDay</td>
+                <td>@m.ReturnDate</td>
+                <td>@m.IsReturn</td>
+
+
+                <td><a href="/BookRentals/ReturnBookConfirm/@m.RentID" class=" btn btn-warning"> Teslim Al </a></td>
+                <td><a href="/BookRentals/BookRentalDetail/@m.RentID" class=" btn btn-info"> Detaylar </a></td>
+
+            </tr>
+        }
+
+    </tbody>
+
+
+
+</table>
+
+<div style="margin-top:80px">
+    @Html.ActionLink("Back to Member-List", "ReturnOperations", "BookRentals")
+</div>
+
+
+
