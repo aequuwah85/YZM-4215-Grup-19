@@ -14,7 +14,7 @@ namespace SmartBookCase1.Controllers
 {
     public class MemberController : Controller
     {
-        SmartBookcaseDtbsEntities6 db = new SmartBookcaseDtbsEntities6();
+        SmartBookcaseDtbsEntitie db = new SmartBookcaseDtbsEntitie();
 
         [HttpGet]
         public ActionResult AddMember()

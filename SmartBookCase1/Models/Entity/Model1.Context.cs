@@ -13,10 +13,10 @@ namespace SmartBookCase1.Models.Entity
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SmartBookcaseDtbsEntities6 : DbContext
+    public partial class SmartBookcaseDtbsEntitie : DbContext
     {
-        public SmartBookcaseDtbsEntities6()
-            : base("name=SmartBookcaseDtbsEntities6")
+        public SmartBookcaseDtbsEntitie()
+            : base("name=SmartBookcaseDtbsEntitie")
         {
         }
     

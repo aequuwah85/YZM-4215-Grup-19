@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "ViewBook";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<h2>KİTAPLAR</h2>
+<br />
+
+@using (Html.BeginForm("ViewBook", "BookArchive", FormMethod.Get))
+{
+    <p>
+        Kitap Adı ile Arama: @Html.TextBox("p")
+        <input type="submit" value="Ara" />
+    </p>
+}
+
+
+<br />
+<table id="tbl1" class="table table-bordered">
+    <thead>
+        <tr>
+
+            <th>Name</th>
+            <th>Category</th>
+            <th>Stock</th>
+            <th>Author</th>
+            <th>Barcode</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+            <tr>
+                <td>@m.BookName</td>
+                <td>@m.BookCategory</td>
+                <td>@m.BookStock</td>
+                <td>@m.BookAuthor</td>
+                <td>@m.BookBarcode</td>
+
+                <td><a href="/BookArchive/EditBook/@m.BookID" class=" btn btn-info"> Güncelle </a></td>
+                <td><a href="/BookArchive/DeleteBook/@m.BookID" class=" btn btn-warning"> Sil </a></td>
+            </tr>
+        }
+
+    </tbody>
+
+
+
+</table>
+
+
+

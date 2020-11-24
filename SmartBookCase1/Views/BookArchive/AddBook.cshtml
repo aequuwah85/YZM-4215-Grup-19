@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "AddBook";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@ViewBag.Message");
+        };
+    </script>
+}
+
+<form class="form-group" method="post">
+    <br />
+    <h3> KİTAP KAYITLARI </h3>
+    <h4> Smart-BookCase Kitap Kaydı Oluşturma Sayfası </h4>
+
+    <hr />
+    <div style="margin-top:40px" class="col-md-4">
+
+        <label> Book-Name : </label>
+        <input class="form-control" type="text" name="BookName" autocomplete="off" required />
+        <br />
+        <label> Category : </label>
+        <input type="text" class="form-control" name="BookCategory" autocomplete="off" required />
+        <br />
+        <label> Stock :</label>
+        <input type="text" class="form-control" name="BookStock" autocomplete="off" required />
+        <br />
+        <label> Author :</label>
+        <input type="text" class="form-control" name="BookAuthor" autocomplete="off" required />
+        <br />
+        <label> Barcode :</label>
+        <input type="text" class="form-control" name="BookBarcode" autocomplete="off" required />
+        <br />
+
+
+        <div style="margin-top:30px">
+            <button class="btn btn-success"> Kitap Kaydını Gerçekleştir </button>
+        </div>
+
+
+        <div style="margin-top:80px">
+            @Html.ActionLink("Back to MainMenu", "Index", "Home")
+        </div>
+
+    </div>
+
+</form>
+
+
+

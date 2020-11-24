@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="SmartBookcaseDtbsModelStoreContainer" CdmEntityContainer="SmartBookcaseDtbsEntities6">
+  <EntityContainerMapping StorageEntityContainer="SmartBookcaseDtbsModelStoreContainer" CdmEntityContainer="SmartBookcaseDtbsEntitie">
     <EntitySetMapping Name="BookArchive">
       <EntityTypeMapping TypeName="SmartBookcaseDtbsModel.BookArchive">
         <MappingFragment StoreEntitySet="BookArchive">

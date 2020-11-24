@@ -28,10 +28,10 @@
       <PropertyRef Name="MemberID" />
     </Key>
     <Property Name="MemberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="MemberName" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="MemberEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="MemberPhone" Type="nvarchar" MaxLength="12" Nullable="false" />
-    <Property Name="MemberAdress" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="MemberName" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="MemberEmail" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="MemberPhone" Type="nchar" MaxLength="50" />
+    <Property Name="MemberAdress" Type="nchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -51,7 +51,7 @@
     <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="UserEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="UserPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="UserPhone" Type="nvarchar" MaxLength="12" Nullable="false" />
+    <Property Name="UserPhone" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <Association Name="FK_BookRent_BookArchive">
     <End Role="BookArchive" Type="Self.BookArchive" Multiplicity="1" />
