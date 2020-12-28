@@ -14,7 +14,8 @@ namespace SmartBookCase1.Controllers
 {
     public class UserController : Controller
     {
-        SmartBookcaseDtbsEntities2 db = new SmartBookcaseDtbsEntities2();
+        SmartBookcaseDtbsEntities10 db = new SmartBookcaseDtbsEntities10();
+        int PasswordCode;
 
         // GET: User
         public ActionResult Index()
@@ -31,17 +32,21 @@ namespace SmartBookCase1.Controllers
         [HttpPost]
         public ActionResult NewUser(UserInformation p1)
         {
+          
             try
             {
                 var varmi = db.UserInformation.Where(i => i.UserEmail == p1.UserEmail).SingleOrDefault();
                 if (varmi != null)
                 {
+                    ViewBag.Message = "Girilen E-maile Kayitli bir Kullanici Hesabi Var!! ";
                     return View();
                 }
+               
 
-
+                string pswrd = Encrypt.MD5Create(p1.UserPassword);
+                p1.UserPassword = pswrd;
                 db.UserInformation.Add(p1);
-            db.SaveChanges();
+                db.SaveChanges();
                 Session["UserName"] = p1.UserName;
                 Session["UserID"] = p1.UserID;
 
@@ -87,8 +92,11 @@ namespace SmartBookCase1.Controllers
                   var u = db.UserInformation.Where(i => i.UserEmail == p1.UserEmail).SingleOrDefault();
                   if (u == null)
                   {
+                    ViewBag.Message = "Girilen E-maile Kayitli bir Kullanici Hesabi Yok!! ";
                       return View();
                   }
+                  string pswrd = Encrypt.MD5Create(p1.UserPassword);
+                  p1.UserPassword = pswrd;
                   if (u.UserPassword == p1.UserPassword)
                   {
                       Session["UserName"] = u.UserName;
@@ -97,7 +105,8 @@ namespace SmartBookCase1.Controllers
                   }
                   else
                   {
-                      return View();
+                    ViewBag.Message = "Sifre veya E-mail Hatali !! ";
+                    return View();
                   }
               }
               catch
@@ -129,19 +138,121 @@ namespace SmartBookCase1.Controllers
                 kisi.UserName = p1.UserName;
                 kisi.UserEmail = p1.UserEmail;
                 kisi.UserPhone = p1.UserPhone;
-                kisi.UserPassword = p1.UserPassword;
+               /* if (p1.UserPassword != null)
+                {
+                    string pswrd = Encrypt.MD5Create(p1.UserPassword);
+                    kisi.UserPassword = pswrd;
+                }    */         
                 db.SaveChanges();
                 return RedirectToAction("Profile", "User");
             }
             catch
             {
                 return View(p1);
+            }          
+        }
+
+        [HttpGet]
+        public ActionResult PasswordReset()
+        {           
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult PasswordReset(UserInformation p1)
+        {
+            var u = db.UserInformation.Where(i => i.UserEmail == p1.UserEmail).SingleOrDefault();
+            if (u == null)
+            {
+                ViewBag.Message = "Girilen E-maile Kayitli bir Kullanici Hesabi Yok!!";
+                return View();
             }
 
+            Random rastgele = new Random();
+            PasswordCode = rastgele.Next(100000, 999999);
+
+            MailMessage eposta = new MailMessage();
+            eposta.From = new MailAddress("smartbookcase@hotmail.com");
+            eposta.To.Add(p1.UserEmail);
+            eposta.Subject = "SMART-BOOKCASE";
+            eposta.Body = "Sayın " + u.UserName + " Smart-BookCase Otomasyon sistemi tarafından Belirlenen Yeni Şifreniz : " + PasswordCode;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Credentials = new NetworkCredential("smartbookcase@hotmail.com", "TeamForza5");
+            smtp.Port = 587;
+            smtp.Host = "smtp.live.com";
+            smtp.EnableSsl = true;
+            smtp.Send(eposta);
+
+            string pswrd = Encrypt.MD5Create(PasswordCode.ToString());
+            u.UserPassword = pswrd;
+            db.SaveChanges();
+
+            ViewBag.Message = "Yeni Sifreniz E-posta Adresinize Gonderildi";
+
+            return RedirectToAction("Login", "User");
+        }
+
+        [HttpGet]
+        public ActionResult NewPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult NewPassword(UserInformation p1)
+        {
+            try
+            {
+
+                if (p1.UserEmail != p1.UserPassword)
+                {
+                    ViewBag.Message = " Yeni sifrelerden biri farkli Girilmistir, Sifreleri Tekrar giriniz ";
+                    return View();
+                }
+
+                int kullaniciID = (int)Session["UserID"];
+                var kisi = db.UserInformation.Where(i => i.UserID == kullaniciID).SingleOrDefault();
+
+                string pswrd = Encrypt.MD5Create(p1.UserName);
+                p1.UserName = pswrd;
+                if (kisi.UserPassword != p1.UserName)
+                {
+                    ViewBag.Message = " Mevcut Sifre Yanlis Girilmistir, Tekrar giris yapiniz ";
+                    return View();
+                }
+                string npswrd = Encrypt.MD5Create(p1.UserPassword);
+                p1.UserPassword = npswrd;
+                kisi.UserPassword = p1.UserPassword;
+
+
+                MailMessage eposta = new MailMessage();
+                eposta.From = new MailAddress("smartbookcase@hotmail.com");
+                eposta.To.Add(kisi.UserEmail);
+                eposta.Subject = "SMART-BOOKCASE";
+                eposta.Body = "Sayın " + kisi.UserName + " Şifreniz Değiştirilmiştir.";
+                SmtpClient smtp = new SmtpClient();
+                smtp.Credentials = new NetworkCredential("smartbookcase@hotmail.com", "TeamForza5");
+                smtp.Port = 587;
+                smtp.Host = "smtp.live.com";
+                smtp.EnableSsl = true;
+                smtp.Send(eposta);
+
+
+                db.SaveChanges();
+                return RedirectToAction("Profile", "User");
+               
+                
+            }
+            catch
+            {
+                return View();
+            }
         }
 
 
-        
+
+
+
 
     }
 }

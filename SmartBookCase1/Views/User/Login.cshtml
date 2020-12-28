@@ -4,6 +4,14 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
+@if(ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@ViewBag.Message");
+        };
+    </script>
+}
 
 
 <form class="form-group" method="post">
@@ -34,8 +42,9 @@
         <br />
 
         <div style="margin-top:80px">
-            @Html.ActionLink("Back To MainMenu", "Index", "Home") |
-            @Html.ActionLink("Sign Up", "NewUser", "User")
+            @Html.ActionLink("Forgot Password?", "PasswordReset", "User") |
+            @Html.ActionLink("Sign Up", "NewUser", "User")           
+
         </div>
 
     </div>

@@ -13,10 +13,10 @@ namespace SmartBookCase1.Models.Entity
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SmartBookcaseDtbsEntities2 : DbContext
+    public partial class SmartBookcaseDtbsEntities10 : DbContext
     {
-        public SmartBookcaseDtbsEntities2()
-            : base("name=SmartBookcaseDtbsEntities2")
+        public SmartBookcaseDtbsEntities10()
+            : base("name=SmartBookcaseDtbsEntities10")
         {
         }
     
@@ -25,6 +25,10 @@ namespace SmartBookCase1.Models.Entity
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<BookArchive> BookArchive { get; set; }
+        public virtual DbSet<BookRent> BookRent { get; set; }
+        public virtual DbSet<MemberInformation> MemberInformation { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<UserInformation> UserInformation { get; set; }
     }
 }
