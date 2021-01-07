@@ -94,7 +94,8 @@ namespace SmartBookCase1.Controllers
             var x = db.BookRent.Where(i => i.RentID == id).SingleOrDefault();
             var y = db.BookArchive.Where(i => i.BookID == x.BookID).SingleOrDefault();
             var z = db.MemberInformation.Where(i => i.MemberID == x.MemberID).SingleOrDefault();
-            var w = db.UserInformation.Where(i => i.UserID == x.UserID).SingleOrDefault();        
+            var w = db.UserInformation.Where(i => i.UserID == x.UserID).SingleOrDefault();
+            db2.BookRentc = x;
             db2.BookArchivec = y;
             db2.MemberInformationc = z;
             db2.UserInformationc = w;
