@@ -7,7 +7,7 @@
     <Property Name="BookID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="BookName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="BookCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="BookStock" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BookStock" Type="Int32" Nullable="false" />
     <Property Name="BookAuthor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="BookBarcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="BookPublisherHouse" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -57,8 +57,9 @@
     <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="UserEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="UserPhone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserIncorrectEntry" Type="Int32" />
     <NavigationProperty Name="BookRent" Relationship="Self.FK_BookRent_UserInformation" FromRole="UserInformation" ToRole="BookRent" />
   </EntityType>
   <Association Name="FK_BookRent_BookArchive">
@@ -97,7 +98,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="SmartBookcaseDtbsEntities10" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="SmartBookcaseDtbsEntities13" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="BookArchive" EntityType="Self.BookArchive" />
     <EntitySet Name="BookRent" EntityType="Self.BookRent" />
     <EntitySet Name="MemberInformation" EntityType="Self.MemberInformation" />

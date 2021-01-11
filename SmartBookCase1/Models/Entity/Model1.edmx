@@ -12,7 +12,7 @@
           <Property Name="BookID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BookName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="BookCategory" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="BookStock" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BookStock" Type="int" Nullable="false" />
           <Property Name="BookAuthor" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="BookBarcode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="BookPublisherHouse" Type="nvarchar" MaxLength="50" />
@@ -25,8 +25,8 @@
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="BookID" Type="int" Nullable="false" />
           <Property Name="MemberID" Type="int" Nullable="false" />
-          <Property Name="RentDate" Type="smalldatetime" Nullable="false" />
-          <Property Name="ReturnDate" Type="smalldatetime" Nullable="false" />
+          <Property Name="RentDate" Type="date" Nullable="false" />
+          <Property Name="ReturnDate" Type="date" Nullable="false" />
           <Property Name="IsReturn" Type="bit" Nullable="false" />
           <Property Name="RentDay" Type="int" Nullable="false" />
         </EntityType>
@@ -57,8 +57,9 @@
           <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="UserEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="UserPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserPassword" Type="nvarchar" MaxLength="50" />
           <Property Name="UserPhone" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="UserIncorrectEntry" Type="int" />
         </EntityType>
         <Association Name="FK_BookRent_BookArchive">
           <End Role="BookArchive" Type="Self.BookArchive" Multiplicity="1" />
@@ -127,7 +128,7 @@
           <Property Name="BookID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BookName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="BookCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="BookStock" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BookStock" Type="Int32" Nullable="false" />
           <Property Name="BookAuthor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="BookBarcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="BookPublisherHouse" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -177,8 +178,9 @@
           <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="UserEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserPhone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserIncorrectEntry" Type="Int32" />
           <NavigationProperty Name="BookRent" Relationship="Self.FK_BookRent_UserInformation" FromRole="UserInformation" ToRole="BookRent" />
         </EntityType>
         <Association Name="FK_BookRent_BookArchive">
@@ -217,7 +219,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SmartBookcaseDtbsEntities10" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SmartBookcaseDtbsEntities13" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BookArchive" EntityType="Self.BookArchive" />
           <EntitySet Name="BookRent" EntityType="Self.BookRent" />
           <EntitySet Name="MemberInformation" EntityType="Self.MemberInformation" />
@@ -241,7 +243,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SmartBookcaseDtbsModelStoreContainer" CdmEntityContainer="SmartBookcaseDtbsEntities10">
+        <EntityContainerMapping StorageEntityContainer="SmartBookcaseDtbsModelStoreContainer" CdmEntityContainer="SmartBookcaseDtbsEntities13">
           <EntitySetMapping Name="BookArchive">
             <EntityTypeMapping TypeName="SmartBookcaseDtbsModel.BookArchive">
               <MappingFragment StoreEntitySet="BookArchive">
@@ -299,6 +301,7 @@
                 <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
                 <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
                 <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+                <ScalarProperty Name="UserIncorrectEntry" ColumnName="UserIncorrectEntry" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

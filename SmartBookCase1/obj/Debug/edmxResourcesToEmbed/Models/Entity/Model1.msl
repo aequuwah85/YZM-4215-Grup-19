@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="SmartBookcaseDtbsModelStoreContainer" CdmEntityContainer="SmartBookcaseDtbsEntities10">
+  <EntityContainerMapping StorageEntityContainer="SmartBookcaseDtbsModelStoreContainer" CdmEntityContainer="SmartBookcaseDtbsEntities13">
     <EntitySetMapping Name="BookArchive">
       <EntityTypeMapping TypeName="SmartBookcaseDtbsModel.BookArchive">
         <MappingFragment StoreEntitySet="BookArchive">
@@ -58,6 +58,7 @@
           <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
           <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
           <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+          <ScalarProperty Name="UserIncorrectEntry" ColumnName="UserIncorrectEntry" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

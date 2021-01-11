@@ -25,11 +25,11 @@
     <h5> Book Barcode: </h5>
     <strong> @Html.DisplayFor(model => model.BookArchivec.BookBarcode) </strong>
     <h5> Rent Date: </h5>
-    <strong> @Html.DisplayFor(model => model.BookRentc.RentDate) </strong>
+    <strong> @Html.DisplayFor(model => model.BookRentc.RentDate).ToString().TrimEnd('0', ':') </strong>
     <h5> Rent Day: </h5>
     <strong> @Html.DisplayFor(model => model.BookRentc.RentDay) </strong>
     <h5> Return Date: </h5>
-    <strong> @Html.DisplayFor(model => model.BookRentc.ReturnDate) </strong>
+    <strong> @Html.DisplayFor(model => model.BookRentc.ReturnDate).ToString().TrimEnd('0', ':') </strong>
     <h5> Member ID: </h5>
     <strong> @Html.DisplayFor(model => model.MemberInformationc.MemberID) </strong>
     <h5> Member Name: </h5>
@@ -44,7 +44,9 @@
     <strong> @Html.DisplayFor(model => model.UserInformationc.UserID) </strong>
     <h5> User Name: </h5>
     <strong> @Html.DisplayFor(model => model.UserInformationc.UserName) </strong>
-
+    <br />
+    <br>
+    <a href="/BookRentals/RentalExtend/@Model.BookRentc.RentID/" class=" btn btn-info">Kiralama Süresini Güncelle </a>
 </div>
 
 

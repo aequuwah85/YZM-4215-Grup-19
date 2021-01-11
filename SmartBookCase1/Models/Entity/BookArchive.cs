@@ -23,7 +23,7 @@ namespace SmartBookCase1.Models.Entity
         public int BookID { get; set; }
         public string BookName { get; set; }
         public string BookCategory { get; set; }
-        public string BookStock { get; set; }
+        public int BookStock { get; set; }
         public string BookAuthor { get; set; }
         public string BookBarcode { get; set; }
         public string BookPublisherHouse { get; set; }

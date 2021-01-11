@@ -14,7 +14,7 @@ namespace SmartBookCase1.Controllers
 {
     public class UserController : Controller
     {
-        SmartBookcaseDtbsEntities10 db = new SmartBookcaseDtbsEntities10();
+        SmartBookcaseDtbsEntities13 db = new SmartBookcaseDtbsEntities13();
         int PasswordCode;
 
         // GET: User
@@ -45,6 +45,7 @@ namespace SmartBookCase1.Controllers
 
                 string pswrd = Encrypt.MD5Create(p1.UserPassword);
                 p1.UserPassword = pswrd;
+                p1.UserIncorrectEntry = 0;
                 db.UserInformation.Add(p1);
                 db.SaveChanges();
                 Session["UserName"] = p1.UserName;
@@ -99,13 +100,25 @@ namespace SmartBookCase1.Controllers
                   p1.UserPassword = pswrd;
                   if (u.UserPassword == p1.UserPassword)
                   {
+                    u.UserIncorrectEntry = 0;
                       Session["UserName"] = u.UserName;
                       Session["UserID"] = u.UserID;
+                    db.SaveChanges();
                     return RedirectToAction("Index", "Home");
                   }
                   else
                   {
-                    ViewBag.Message = "Sifre veya E-mail Hatali !! ";
+                    u.UserIncorrectEntry +=1 ;
+                    if (u.UserIncorrectEntry >= 3)
+                    {
+                        ViewBag.Message = " Sifrenizi 3 kez yanlis girdiniz, Hesabiniz Bloke Edilmistir. Blokeyi kaldirmak icin sistemden yeni parola aliniz. ";
+                        u.UserPassword = null;
+                        db.SaveChanges();
+                        return View();
+                    }
+
+                    db.SaveChanges();
+                    ViewBag.Message = " !! Sifre Hatali !! ";
                     return View();
                   }
               }

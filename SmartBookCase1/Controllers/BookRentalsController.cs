@@ -15,7 +15,7 @@ namespace SmartBookCase1.Controllers
     public class BookRentalsController : Controller
     {
 
-        SmartBookcaseDtbsEntities10 db = new SmartBookcaseDtbsEntities10();
+        SmartBookcaseDtbsEntities13 db = new SmartBookcaseDtbsEntities13();
       
 
         public ActionResult RentalOperations(string p)
@@ -136,6 +136,7 @@ namespace SmartBookCase1.Controllers
                 return RedirectToAction("ReturnOperations", "BookRentals");
             } 
             x.IsReturn = true;
+            x.ReturnDate = DateTime.Today;
             db.SaveChanges();
 
             var member = db.MemberInformation.Where(i => i.MemberID == x.MemberID).SingleOrDefault();
@@ -154,6 +155,35 @@ namespace SmartBookCase1.Controllers
             smtp.Send(eposta);
  
             return RedirectToAction("ReturnOperations", "BookRentals");
+
+        }
+
+        [HttpGet]
+        public ActionResult RentalExtend(int id)
+        {
+            var kiralama = db.BookRent.Where(i => i.RentID == id).SingleOrDefault();
+            return View(kiralama);
+        }
+
+        [HttpPost]
+        public ActionResult RentalExtend(int id, BookRent p1)
+        {
+            try
+            {
+                var kiralama = db.BookRent.Where(i => i.RentID == id).SingleOrDefault();
+
+                kiralama.RentDay = p1.RentDay;
+                kiralama.ReturnDate = kiralama.RentDate.AddDays(p1.RentDay);
+              
+
+
+                db.SaveChanges();
+                return RedirectToAction("RentalOperations", "BookRentals");
+            }
+            catch
+            {
+                return View(p1);
+            }
 
         }
 

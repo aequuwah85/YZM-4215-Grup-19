@@ -42,19 +42,26 @@
     <tbody>
         @foreach (var m in Model)
         {
-            <tr>
-                <td>@m.RentID</td>
-                <td>@m.BookID</td>
-                <td>@m.MemberID</td>
-                <td>@m.RentDate</td>
-                <td>@m.RentDay</td>
-                <td>@m.ReturnDate</td>
-                <td>@m.IsReturn</td>
+        <tr>
+            <td>@m.RentID</td>
+            <td>@m.BookID</td>
+            <td>@m.MemberID</td>
+            <td>@m.RentDate.ToString().TrimEnd('0', ':')</td>
+            <td>@m.RentDay</td>
+            <td>@m.ReturnDate.ToString().TrimEnd('0', ':')</td>
+            @if (m.IsReturn == true)
+            {
+                <td style="color:green"> Teslim Edildi </td>
+            }
+            else
+            {
+                <td style="color:red"> Teslim Edilmedi </td>
+            }
 
 
-                <td><a href="/BookRentals/ReturnBookConfirm/@m.RentID" class=" btn btn-warning"> Teslim Al </a> <a href="/BookRentals/BookRentalDetail/@m.RentID" class=" btn btn-info"> Detaylar </a></td>
+            <td><a href="/BookRentals/ReturnBookConfirm/@m.RentID" class=" btn btn-warning"> Teslim Al </a> <a href="/BookRentals/BookRentalDetail/@m.RentID" class=" btn btn-info"> Detaylar </a></td>
 
-            </tr>
+        </tr>
         }
 
     </tbody>

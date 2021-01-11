@@ -28,9 +28,5 @@ namespace SmartBookCase1.Controllers
         }
 
 
-
-
-
-
     }
 }

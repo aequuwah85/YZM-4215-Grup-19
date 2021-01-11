@@ -14,7 +14,7 @@ namespace SmartBookCase1.Controllers
     public class BookArchiveController : Controller
     {
         // GET: BookArchive
-        SmartBookcaseDtbsEntities10 db = new SmartBookcaseDtbsEntities10();
+        SmartBookcaseDtbsEntities13 db = new SmartBookcaseDtbsEntities13();
 
 
         [HttpGet]
